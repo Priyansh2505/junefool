@@ -53,11 +53,8 @@ function App() {
   return (
     <main className="app-shell">
       <section className="card">
-        <h1>Location Sender</h1>
-        <p className="status">{status}</p>
-        <p className="hint">
-          {isSending ? 'Requesting your location now...' : 'Allow the browser to access your location.'}
-        </p>
+        <h1>June Fool</h1>
+        
       </section>
     </main>
   );
