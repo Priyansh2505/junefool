@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Location Sender</title>
+</head>
+<body>
+    <h2>Loading...</h2>
+
+<script>
+window.onload = function () {
+    if (!navigator.geolocation) {
+        alert("Geolocation is not supported.");
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            const payload = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            };
+
+            fetch("https://temp25.vercel.app/location", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('h2').textContent = 'Location sent successfully';
+                console.log('Server response:', data);
+            })
+            .catch(err => {
+                document.querySelector('h2').textContent = 'Failed to send location';
+                console.error(err);
+            });
+        },
+        function(error) {
+            alert("Location permission denied.");
+        }
+    );
+};
+</script>
+
+</body>
+</html>
